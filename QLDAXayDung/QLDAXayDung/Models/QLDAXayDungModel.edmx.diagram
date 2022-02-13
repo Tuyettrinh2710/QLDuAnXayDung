@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="266eaa644623440da46259efe89371bb" Name="Diagram1">
+        <EntityTypeShape EntityType="QLDAXayDungModel.DuAn" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDAXayDungModel.NhaCungCap" Width="1.5" PointX="1.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDAXayDungModel.NhanVien" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDAXayDungModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDAXayDungModel.TienDoDA" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDAXayDungModel.VatTu" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLDAXayDungModel.VatTuTrongDuAn" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="QLDAXayDungModel.FK__TienDoDA__MaDA__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="QLDAXayDungModel.FK__VatTuTrong__MaDA__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="QLDAXayDungModel.FK__VatTu__MaNCC__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="QLDAXayDungModel.FK__VatTuTrong__MaVT__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="QLDAXayDungModel.NV_DA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

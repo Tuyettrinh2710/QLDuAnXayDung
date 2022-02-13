@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QLDAXayDung.Models.DuAn>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenDA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaDiem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayBatDau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenDA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaDiem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayBatDau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayKetThuc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaDA }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaDA }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaDA })
+        </td>
+    </tr>
+}
+
+</table>
