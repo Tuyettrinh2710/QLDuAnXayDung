@@ -12,7 +12,6 @@ namespace QLDAXayDung.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     public partial class DuAn
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,12 +24,16 @@ namespace QLDAXayDung.Models
 
         [Display(Name = "Mã dự án")]
         public string MaDA { get; set; }
+
         [Display(Name = "Tên dự án")]
         public string TenDA { get; set; }
+
         [Display(Name = "Địa điểm")]
         public string DiaDiem { get; set; }
+
         [Display(Name = "Ngày bắt đầu")]
         public Nullable<System.DateTime> NgayBatDau { get; set; }
+
         [Display(Name = "Ngày kết thúc")]
         public Nullable<System.DateTime> NgayKetThuc { get; set; }
     

@@ -12,20 +12,23 @@ namespace QLDAXayDung.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     public partial class TienDoDA
     {
-        [Display(Name = "Mã tiến độ")]
+        [Display(Name = "Mã Tiến Độ")]
         public int MaTD { get; set; }
-        [Display(Name = "Mã dự án")]
+
+        [Display(Name = "Mã Dự Án")]
         public string MaDA { get; set; }
-        [Display(Name = "Công việc")]
+
+        [Display(Name = "Công Việc")]
         public string CongViec { get; set; }
-        [Display(Name = "Ngày bắt đầu")]
+
+        [Display(Name = "Ngày Bắt Đầu")]
         public Nullable<System.DateTime> NgayBatDau { get; set; }
-        [Display(Name = "Ngày kết thúc")]
+
+        [Display(Name = "Ngày Kết Thúc")]
         public Nullable<System.DateTime> NgayKetThuc { get; set; }
-        [Display(Name = "Dự án")]
+    
         public virtual DuAn DuAn { get; set; }
     }
 }

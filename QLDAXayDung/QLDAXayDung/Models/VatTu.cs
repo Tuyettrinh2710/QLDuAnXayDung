@@ -11,7 +11,7 @@ namespace QLDAXayDung.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class VatTu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +19,19 @@ namespace QLDAXayDung.Models
         {
             this.VatTuTrongDuAns = new HashSet<VatTuTrongDuAn>();
         }
-    
+        [Display(Name = "Mã vật tư")]
         public int MaVT { get; set; }
+
+        [Display(Name = "Tên vật tư")]
         public string TenVT { get; set; }
+
+        [Display(Name = "Số lượng")]
         public Nullable<int> SoLuong { get; set; }
+
+        [Display(Name = "Đơn vị tính")]
         public string ĐonViTinh { get; set; }
+
+        [Display(Name = "Nhà cung cấp")]
         public Nullable<int> MaNCC { get; set; }
     
         public virtual NhaCungCap NhaCungCap { get; set; }
