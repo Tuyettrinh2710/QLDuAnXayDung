@@ -12,14 +12,13 @@ namespace QLDAXayDung.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TienDoDA
+    public partial class NV_DA
     {
-        public int MaTD { get; set; }
+        public int MaNV { get; set; }
         public int MaDA { get; set; }
         public string CongViec { get; set; }
-        public Nullable<System.DateTime> NgayBatDau { get; set; }
-        public Nullable<System.DateTime> NgayKetThuc { get; set; }
     
         public virtual DuAn DuAn { get; set; }
+        public virtual NhanVien NhanVien { get; set; }
     }
 }

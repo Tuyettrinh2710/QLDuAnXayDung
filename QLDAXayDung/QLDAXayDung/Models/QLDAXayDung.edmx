@@ -9,7 +9,8 @@
           <Key>
             <PropertyRef Name="MaDA" />
           </Key>
-          <Property Name="MaDA" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaDA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Anh" Type="image" />
           <Property Name="TenDA" Type="nvarchar" MaxLength="100" />
           <Property Name="DiaDiem" Type="nvarchar" MaxLength="150" />
           <Property Name="NgayBatDau" Type="datetime" />
@@ -37,7 +38,6 @@
           <Property Name="GioiTinh" Type="nvarchar" MaxLength="3" />
           <Property Name="SDT" Type="nvarchar" MaxLength="10" />
           <Property Name="CMND" Type="nvarchar" MaxLength="12" />
-          <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NV_DA">
           <Key>
@@ -45,7 +45,8 @@
             <PropertyRef Name="MaDA" />
           </Key>
           <Property Name="MaNV" Type="int" Nullable="false" />
-          <Property Name="MaDA" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaDA" Type="int" Nullable="false" />
+          <Property Name="CongViec" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -63,7 +64,7 @@
             <PropertyRef Name="MaDA" />
           </Key>
           <Property Name="MaTD" Type="int" Nullable="false" />
-          <Property Name="MaDA" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaDA" Type="int" Nullable="false" />
           <Property Name="CongViec" Type="nvarchar(max)" />
           <Property Name="NgayBatDau" Type="datetime" />
           <Property Name="NgayKetThuc" Type="datetime" />
@@ -84,7 +85,7 @@
             <PropertyRef Name="MaDA" />
           </Key>
           <Property Name="MaVT" Type="int" Nullable="false" />
-          <Property Name="MaDA" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MaDA" Type="int" Nullable="false" />
           <Property Name="SoLuong" Type="int" />
         </EntityType>
         <Association Name="FK__NV_DA__MaDA__09DE7BCC">
@@ -202,14 +203,15 @@
           <Key>
             <PropertyRef Name="MaDA" />
           </Key>
-          <Property Name="MaDA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaDA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Anh" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="TenDA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DiaDiem" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
           <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NV_DA" Relationship="Self.FK__NV_DA__MaDA__09DE7BCC" FromRole="DuAn" ToRole="NV_DA" />
           <NavigationProperty Name="TienDoDAs" Relationship="Self.FK__TienDoDA__MaDA__1CF15040" FromRole="DuAn" ToRole="TienDoDA" />
           <NavigationProperty Name="VatTuTrongDuAns" Relationship="Self.FK__VatTuTrong__MaDA__182C9B23" FromRole="DuAn" ToRole="VatTuTrongDuAn" />
-          <NavigationProperty Name="NhanViens" Relationship="Self.NV_DA" FromRole="DuAn" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="NhaCungCap">
           <Key>
@@ -234,8 +236,18 @@
           <Property Name="GioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="CMND" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
-          <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DuAns" Relationship="Self.NV_DA" FromRole="NhanVien" ToRole="DuAn" />
+          <NavigationProperty Name="NV_DA" Relationship="Self.FK__NV_DA__MaNV__08EA5793" FromRole="NhanVien" ToRole="NV_DA" />
+        </EntityType>
+        <EntityType Name="NV_DA">
+          <Key>
+            <PropertyRef Name="MaNV" />
+            <PropertyRef Name="MaDA" />
+          </Key>
+          <Property Name="MaNV" Type="Int32" Nullable="false" />
+          <Property Name="MaDA" Type="Int32" Nullable="false" />
+          <Property Name="CongViec" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DuAn" Relationship="Self.FK__NV_DA__MaDA__09DE7BCC" FromRole="NV_DA" ToRole="DuAn" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK__NV_DA__MaNV__08EA5793" FromRole="NV_DA" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -253,7 +265,7 @@
             <PropertyRef Name="MaDA" />
           </Key>
           <Property Name="MaTD" Type="Int32" Nullable="false" />
-          <Property Name="MaDA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaDA" Type="Int32" Nullable="false" />
           <Property Name="CongViec" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayBatDau" Type="DateTime" Precision="3" />
           <Property Name="NgayKetThuc" Type="DateTime" Precision="3" />
@@ -277,11 +289,23 @@
             <PropertyRef Name="MaDA" />
           </Key>
           <Property Name="MaVT" Type="Int32" Nullable="false" />
-          <Property Name="MaDA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaDA" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" />
           <NavigationProperty Name="DuAn" Relationship="Self.FK__VatTuTrong__MaDA__182C9B23" FromRole="VatTuTrongDuAn" ToRole="DuAn" />
           <NavigationProperty Name="VatTu" Relationship="Self.FK__VatTuTrong__MaVT__173876EA" FromRole="VatTuTrongDuAn" ToRole="VatTu" />
         </EntityType>
+        <Association Name="FK__NV_DA__MaDA__09DE7BCC">
+          <End Role="DuAn" Type="Self.DuAn" Multiplicity="1" />
+          <End Role="NV_DA" Type="Self.NV_DA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DuAn">
+              <PropertyRef Name="MaDA" />
+            </Principal>
+            <Dependent Role="NV_DA">
+              <PropertyRef Name="MaDA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TienDoDA__MaDA__1CF15040">
           <End Role="DuAn" Type="Self.DuAn" Multiplicity="1" />
           <End Role="TienDoDA" Type="Self.TienDoDA" Multiplicity="*" />
@@ -318,6 +342,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__NV_DA__MaNV__08EA5793">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="NV_DA" Type="Self.NV_DA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="NV_DA">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__VatTuTrong__MaVT__173876EA">
           <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
           <End Role="VatTuTrongDuAn" Type="Self.VatTuTrongDuAn" Multiplicity="*" />
@@ -330,18 +366,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="NV_DA">
-          <End Role="DuAn" Type="Self.DuAn" Multiplicity="*" />
-          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="QLDAXayDungEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DuAns" EntityType="Self.DuAn" />
           <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
           <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="NV_DA" EntityType="Self.NV_DA" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TienDoDAs" EntityType="Self.TienDoDA" />
           <EntitySet Name="VatTus" EntityType="Self.VatTu" />
           <EntitySet Name="VatTuTrongDuAns" EntityType="Self.VatTuTrongDuAn" />
+          <AssociationSet Name="FK__NV_DA__MaDA__09DE7BCC" Association="Self.FK__NV_DA__MaDA__09DE7BCC">
+            <End Role="DuAn" EntitySet="DuAns" />
+            <End Role="NV_DA" EntitySet="NV_DA" />
+          </AssociationSet>
           <AssociationSet Name="FK__TienDoDA__MaDA__1CF15040" Association="Self.FK__TienDoDA__MaDA__1CF15040">
             <End Role="DuAn" EntitySet="DuAns" />
             <End Role="TienDoDA" EntitySet="TienDoDAs" />
@@ -354,13 +391,13 @@
             <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
             <End Role="VatTu" EntitySet="VatTus" />
           </AssociationSet>
+          <AssociationSet Name="FK__NV_DA__MaNV__08EA5793" Association="Self.FK__NV_DA__MaNV__08EA5793">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="NV_DA" EntitySet="NV_DA" />
+          </AssociationSet>
           <AssociationSet Name="FK__VatTuTrong__MaVT__173876EA" Association="Self.FK__VatTuTrong__MaVT__173876EA">
             <End Role="VatTu" EntitySet="VatTus" />
             <End Role="VatTuTrongDuAn" EntitySet="VatTuTrongDuAns" />
-          </AssociationSet>
-          <AssociationSet Name="NV_DA" Association="Self.NV_DA">
-            <End Role="DuAn" EntitySet="DuAns" />
-            <End Role="NhanVien" EntitySet="NhanViens" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -373,6 +410,7 @@
             <EntityTypeMapping TypeName="QLDAXayDungModel.DuAn">
               <MappingFragment StoreEntitySet="DuAn">
                 <ScalarProperty Name="MaDA" ColumnName="MaDA" />
+                <ScalarProperty Name="Anh" ColumnName="Anh" />
                 <ScalarProperty Name="TenDA" ColumnName="TenDA" />
                 <ScalarProperty Name="DiaDiem" ColumnName="DiaDiem" />
                 <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
@@ -402,7 +440,15 @@
                 <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
                 <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="ChucVu" ColumnName="ChucVu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NV_DA">
+            <EntityTypeMapping TypeName="QLDAXayDungModel.NV_DA">
+              <MappingFragment StoreEntitySet="NV_DA">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaDA" ColumnName="MaDA" />
+                <ScalarProperty Name="CongViec" ColumnName="CongViec" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -448,14 +494,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="NV_DA" TypeName="QLDAXayDungModel.NV_DA" StoreEntitySet="NV_DA">
-            <EndProperty Name="DuAn">
-              <ScalarProperty Name="MaDA" ColumnName="MaDA" />
-            </EndProperty>
-            <EndProperty Name="NhanVien">
-              <ScalarProperty Name="MaNV" ColumnName="MaNV" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

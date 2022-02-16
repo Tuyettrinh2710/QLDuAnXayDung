@@ -6,13 +6,16 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using QLDAXayDung.Models;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace QLDAXayDung.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleAdminController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
-        [Authorize(Roles = "Admin")]
+        
         // GET: RoleAdmin
         public ActionResult Index()
         {
@@ -21,9 +24,20 @@ namespace QLDAXayDung.Controllers
         }
 
         // GET: RoleAdmin/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(string id)
         {
-            return View();
+            if(id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var role = await roleManager.FindByIdAsync(id);
+            var listUser = new List<ApplicationUser>();
+            foreach (var user in userManager.Users.ToList())
+                if (await userManager.IsInRoleAsync(user.Id, role.Name))
+                    listUser.Add(user);
+            ViewBag.Users = listUser;
+            ViewBag.UserCount = listUser.Count();
+            return View(role);
         }
 
         // GET: RoleAdmin/Create
@@ -34,62 +48,91 @@ namespace QLDAXayDung.Controllers
 
         // POST: RoleAdmin/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(Role roleView)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                var role = new IdentityRole(roleView.Name);
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                var roleResult = await roleManager.CreateAsync(role);
+                if (!roleResult.Succeeded)
+                {
+                    ModelState.AddModelError("", roleResult.Errors.First());
+                    return View();
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: RoleAdmin/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+                return HttpNotFound();
+            Role roleModel = new Role
+            {
+                Id = role.Id,
+                Name = role.Name
+            };
+            return View(roleModel);
         }
 
         // POST: RoleAdmin/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(Role roleModel)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                var role = await roleManager.FindByIdAsync(roleModel.Id);
+                if(role != null)
+                {
+                    role.Name = roleModel.Name;
+                    await roleManager.UpdateAsync(role);
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: RoleAdmin/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(string id)
         {
-            return View();
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+                return HttpNotFound();
+            return View(role);
         }
 
         // POST: RoleAdmin/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(string id, string tpm ="")
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add delete logic here
-
+                if(id == null)
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+                var role = await roleManager.FindByIdAsync(id);
+                if (role == null)
+                    return HttpNotFound();
+                IdentityResult result = await roleManager.DeleteAsync(role);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", result.Errors.First());
+                    return View(0);
+                }
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
     }
 }

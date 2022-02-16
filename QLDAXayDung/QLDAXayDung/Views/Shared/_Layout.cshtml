@@ -21,6 +21,18 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Quản trị quyền", "Index", "RoleAdmin")</li>
+                        <li>@Html.ActionLink("Quản trị user", "Index", "UserAdmin")</li>
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("QuanLy"))
+                    {
+                        <li>@Html.ActionLink("Quản lý Dự Án", "Index", "DuAn")</li>
+                        <li>@Html.ActionLink("Quản lý Vật Tư", "Index", "VatTu")</li>
+                        <li>@Html.ActionLink("Quản lý Tiến độ", "Index", "TienDoDA")</li>
+                        <li>@Html.ActionLink("Quản lý Nhân viên", "Index", "NhanVien")</li>
+                    }
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")

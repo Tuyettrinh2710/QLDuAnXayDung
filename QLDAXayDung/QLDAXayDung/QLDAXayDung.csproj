@@ -177,6 +177,7 @@
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\RoleAdminController.cs" />
     <Compile Include="Controllers\TienDoDAController.cs" />
+    <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\VatTuController.cs" />
     <Compile Include="Controllers\VatTuTrongDuAnController.cs" />
     <Compile Include="Global.asax.cs">
@@ -192,6 +193,9 @@
       <DependentUpon>QLDAXayDung.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NhanVien.cs">
+      <DependentUpon>QLDAXayDung.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NV_DA.cs">
       <DependentUpon>QLDAXayDung.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QLDAXayDung.Context.cs">
@@ -216,6 +220,7 @@
     <Compile Include="Models\TienDoDA.cs">
       <DependentUpon>QLDAXayDung.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\VatTu.cs">
       <DependentUpon>QLDAXayDung.tt</DependentUpon>
     </Compile>
@@ -329,6 +334,13 @@
     <Content Include="Views\VatTuTrongDuAn\Edit.cshtml" />
     <Content Include="Views\VatTuTrongDuAn\Index.cshtml" />
     <Content Include="Views\RoleAdmin\Index.cshtml" />
+    <Content Include="Views\RoleAdmin\Details.cshtml" />
+    <Content Include="Views\RoleAdmin\Create.cshtml" />
+    <Content Include="Views\RoleAdmin\Edit.cshtml" />
+    <Content Include="Views\RoleAdmin\Delete.cshtml" />
+    <Content Include="Views\UserAdmin\Index.cshtml" />
+    <Content Include="Views\UserAdmin\Details.cshtml" />
+    <Content Include="Views\UserAdmin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

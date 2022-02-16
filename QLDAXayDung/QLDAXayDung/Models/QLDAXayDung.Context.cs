@@ -28,6 +28,7 @@ namespace QLDAXayDung.Models
         public virtual DbSet<DuAn> DuAns { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
+        public virtual DbSet<NV_DA> NV_DA { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TienDoDA> TienDoDAs { get; set; }
         public virtual DbSet<VatTu> VatTus { get; set; }
